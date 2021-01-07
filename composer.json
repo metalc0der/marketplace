@@ -1,0 +1,46 @@
+{
+    "name": "metalc0der/marketplace",
+    "description": "A laravel package to manage marketplace applications",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Yunior Rodriguez",
+            "email": "yunior.rdguez@gmail.com"
+        }
+    ],
+    "require": {
+        "danog/class-finder": "^0.4.8"
+    },
+    "autoload": {
+        "psr-4":
+        {
+            "Metalc0der\\Marketplace\\": "src",
+            "Metalc0der\\Marketplace\\Database\\Factories\\": "database/factories"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Metalc0der\\Marketplace\\Tests\\": "tests",
+            "Metalc0der\\Marketplace\\Tests\\Plugins\\": "tests/Plugins"
+        }
+    },
+    "require-dev": {
+        "orchestra/testbench": "^6.0",
+        "phpunit/phpunit": "^9.5"
+    },
+    "scripts": {
+    "test": "vendor/bin/phpunit",
+    "test-f": "vendor/bin/phpunit --filter"
+    },    
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Metalc0der\\Marketplace\\MarketplaceServiceProvider"
+            ],
+            "aliases": {
+                "Marketplace": "Metalc0der\\Marketplace\\Facades\\Marketplace"
+            }
+        }
+    }
+}
