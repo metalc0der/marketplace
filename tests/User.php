@@ -8,10 +8,12 @@ use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Metalc0der\Marketplace\Traits\GenerateUuidAsPrimary;
+use Metalc0der\Marketplace\Traits\HasSettings;
 
 class User extends Model implements AuthorizableContract, AuthenticatableContract
 {
-    use Authorizable, Authenticatable, HasFactory;
+    use Authorizable, Authenticatable, HasFactory, HasSettings, GenerateUuidAsPrimary;
 
     protected $guarded = [];
 

@@ -6,6 +6,7 @@ use danog\ClassFinder\ClassFinder;
 use Illuminate\Support\Facades\Config;
 use Metalc0der\Marketplace\Contracts\Pluggable;
 use Metalc0der\Marketplace\Models\InstalledApplication;
+use Metalc0der\Marketplace\Models\Setting;
 
 class MarketplaceManager
 {
@@ -39,5 +40,27 @@ class MarketplaceManager
         });
 
         return $plugin_ids;
+    }
+
+    public function saveSettings($settings, $seteable_id, $seteable_type, $application_id)
+    {
+        collect($settings)->each(function($value, $key) use($application_id, $seteable_id, $seteable_type) {
+            Setting::updateOrCreate(
+                ['application_id' => $application_id, 'seteable_id' => $seteable_id, 'seteable_type' => $seteable_type, 'key' => $key],
+                ['value' => $value]
+            );
+        });
+
+        return $this->getSettings($seteable_id, $seteable_type, $application_id);
+    }
+
+    public function getSettings($application_id, $seteable_id = null, $seteable_type = null)
+    {
+        $query = Setting::where('application_id', $application_id);
+
+        $query->when((!is_null($seteable_id)) ? $seteable_id : false, fn ($query, $seteable_id) => $query->where('seteable_id', $seteable_id));
+        $query->when((!is_null($seteable_type)) ? $seteable_type : false, fn ($query, $seteable_type) => $query->where('seteable_type', $seteable_type));
+
+        return $query->get();
     }
 }

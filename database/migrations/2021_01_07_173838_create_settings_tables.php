@@ -19,7 +19,8 @@ class CreateSettingsTables extends Migration
             $table->string('value');
             $table->uuid('seteable_id');
             $table->string('seteable_type');
-            $table->foreignId('application_id')->constrained('installed_applications');
+            $table->uuid('application_id');
+            $table->foreign('application_id')->references('id')->on('installed_applications');
         });
     }
 
