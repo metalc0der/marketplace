@@ -17,13 +17,9 @@ class CreateSettingsTables extends Migration
             $table->uuid('id')->primary();
             $table->string('key');
             $table->string('value');
-            $table->foreignId('application_id')->constrained('installed_applications');
-        });
-
-        Schema::create('seteables', function (Blueprint $table) {
             $table->uuid('seteable_id');
             $table->string('seteable_type');
-            $table->foreignId('setting_id')->constrained('settings');
+            $table->foreignId('application_id')->constrained('installed_applications');
         });
     }
 

@@ -8,6 +8,6 @@ trait HasSettings
 {
     public function settings()
     {
-        return $this->morphToMany(Setting::class, 'seteable');
+        return $this->morphMany(Setting::class, 'seteable');
     }
 }
